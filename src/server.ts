@@ -1,10 +1,12 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import SendMail from "./sendMailer";
 import { emailValidator, validateString } from "./utils/validator";
 dotenv.config();
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 app.post("/api/v1/mail/send", async (req: Request, res: Response) => {
@@ -42,3 +44,5 @@ app.post("/api/v1/mail/send", async (req: Request, res: Response) => {
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log("server is running!"));
+
+export default app;
