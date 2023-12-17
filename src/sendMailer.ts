@@ -23,15 +23,17 @@ class SendMail {
       subject: subject,
       priority: "high",
       html: `
-      <div style="width: 100%; height: auto; padding: 15px 30px; text-align: center; maring: auto;">
-      <div>
-        <h2 style="font-weight: 600; font-size: 20px; width: 60%">You received the following message from the contact form</h2>
-        <hr style="width: 60%" />
-        <p style="padding: 0px 5px; width: 60%">${senderMessage}</p>
-        <hr style="width: 60%" />
-        <p style="width: 60%; font-size: 17px; padding: 7px 15px; text-decoration: none; margin-top: 7px">The sender's email is: ${email}</a>
+      <div class="container" style="text-align: center">
+      <div class="main">
+        <h2 style="font-weight: 600; font-size: 20px">
+          You received the following message from the contact form
+        </h2>
+        <hr style="width: 50%; background-color: gray" />
+        <p>${senderMessage}</p>
+        <hr style="width: 30%; background-color: gray" />
+        <p>The sender's email is: <b>${email}</b></p>
       </div>
-    <div>
+    </div>
         `,
     };
   }
