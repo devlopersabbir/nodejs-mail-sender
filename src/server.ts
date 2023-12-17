@@ -7,7 +7,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-app.post("/api/v1/mail/send", (req: Request, res: Response) => {
+app.post("/api/v1/mail/send", async (req: Request, res: Response) => {
   const { senderName, senderEmail, senderMessage } = req.body;
 
   // simple server-side validation
@@ -22,11 +22,22 @@ app.post("/api/v1/mail/send", (req: Request, res: Response) => {
   if (senderMessage.length < 5)
     return res.status(400).json({ message: "Message length is too low!" });
 
-  res.status(200).json(req.body);
-  // new SendMail("mdsadikulislamsabbir@gmail.com", "Hello Sabbir", "Sabbir");
-  // res.status(200).json({
-  //   hello: "world",
-  // });
+  const mailSender = new SendMail(
+    senderEmail,
+    `${senderName} want to contact from Taboverrider`,
+    senderName,
+    senderMessage
+  );
+  try {
+    await mailSender.send();
+    res.status(200).json({
+      message: "Email sent successfully😊",
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Something went wrong!😢",
+    });
+  }
 });
 
 const PORT = process.env.PORT || 4000;
