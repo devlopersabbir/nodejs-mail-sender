@@ -1,13 +1,11 @@
 {
   "name": "nodemailer",
   "description": "node js mail sender",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "type": "commonjs",
   "scripts": {
     "dev": "nodemon src/server.ts",
-    "build": "tsc",
-    "start": "node src/server.js",
-    "vercel-build": "tsc"
+    "start": "node src/server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

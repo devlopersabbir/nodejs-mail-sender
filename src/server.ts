@@ -8,7 +8,18 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static("public"));
 
+// health checker
+app.get("/", (req, res) => {
+  res.status(200).json({
+    version: "0.0.3",
+    name: "Mail sender API",
+    message: "API works perfectly",
+    creator: "Sabbir Hossain Shuvo",
+    github: "https://github.com/devlopersabbir",
+  });
+});
 app.post("/api/v1/mail/send", async (req: Request, res: Response) => {
   const { senderName, senderEmail, senderMessage } = req.body;
 
