@@ -36,7 +36,7 @@ class SendMail {
       <hr style="width: 30%; background-color: gray" />
       <span><b>Sender Information</b></span>
       <div style="display: flex; flex-direction: column; justify-content: start; align-items: start">
-         <p style="margin: 0px;">Name: <b>${name}</b></p>
+         <p style="margin: 0px;">Name: <b>${name}</b></p><br />
          <p style="margin: 0px;">Email: <b>${email}</b></p>
       </div>
    </div>
