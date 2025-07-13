@@ -1,3 +1,5 @@
+/** =================================== THIS FILE IS DEPRECATED ==================================== */
+/** ============================== DEPRICATION DATE: **13 July 2025** ============================== */
 export const validateString = (
   value: unknown,
   maxLength: number

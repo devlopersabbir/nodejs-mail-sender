@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import SendMail from "./sendMailer";
 import { emailValidator, validateString } from "./utils/validator";
+import { formSchema } from "./lib/form-validation";
 dotenv.config();
 
 const app = express();
@@ -21,25 +22,14 @@ app.get("/", (req, res) => {
   });
 });
 app.post("/api/v1/mail/send", async (req: Request, res: Response) => {
-  const { senderName, senderEmail, senderMessage } = req.body;
-
-  // simple server-side validation
-  if (!validateString(senderName, 500))
-    return res.status(400).json({ message: "Invalid sender name" });
-  if (senderName.length < 5)
-    return res.status(400).json({ message: "Name length is too low!" });
-  if (!emailValidator(senderEmail))
-    return res.status(400).json({ message: "Invalid sender email" });
-  if (!validateString(senderMessage, 5000))
-    return res.status(400).json({ message: "Invalid message" });
-  if (senderMessage.length < 5)
-    return res.status(400).json({ message: "Message length is too low!" });
+  const { success, data, error } = formSchema.safeParse(req.body);
+  if (!success) return res.status(400).json(error);
 
   const mailSender = new SendMail(
-    senderEmail,
-    `${senderName} want to contact from Taboverrider`,
-    senderName,
-    senderMessage
+    data.email,
+    `New Form Message by ${data.name}`,
+    data.name,
+    data.message
   );
   try {
     await mailSender.send();

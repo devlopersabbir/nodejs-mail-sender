@@ -1,7 +1,7 @@
 {
   "name": "nodemailer",
   "description": "node js mail sender",
-  "version": "0.0.3",
+  "version": "1.1.4",
   "type": "commonjs",
   "scripts": {
     "dev": "nodemon src/server.ts",
@@ -11,7 +11,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "nodemailer": "^6.9.6"
+    "nodemailer": "^6.9.6",
+    "zod": "^4.0.5"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
