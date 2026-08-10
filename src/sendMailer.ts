@@ -7,7 +7,8 @@ class SendMail {
     email: string,
     subject: string,
     name: string,
-    senderMessage: string
+    senderMessage: string,
+    customHtml?: string
   ) {
     this.tranport = createTransport({
       service: "gmail",
@@ -17,15 +18,7 @@ class SendMail {
       },
     });
 
-    this.mailOptions = {
-      from: email,
-      to: process.env
-        .RECEIVER_EMAIL_ADDRESS /** user can be change the sender email from the .env */,
-      // from: email,
-      // to: process.env.AUTH_USER_EMAIL, /** this line depricated */
-      subject: subject,
-      priority: "high",
-      html: `
+    const defaultHtml = `
       <div class="container" style="text-align: center">
    <div class="main">
       <h2 style="font-weight: 600; font-size: 20px">
@@ -41,7 +34,17 @@ class SendMail {
       </div>
    </div>
 </div>
-        `,
+        `;
+
+    this.mailOptions = {
+      from: email,
+      to: process.env
+        .RECEIVER_EMAIL_ADDRESS /** user can be change the sender email from the .env */,
+      // from: email,
+      // to: process.env.AUTH_USER_EMAIL, /** this line depricated */
+      subject: subject,
+      priority: "high",
+      html: customHtml || defaultHtml,
     };
   }
 

@@ -25,11 +25,14 @@ app.post("/api/v1/mail/send", async (req: Request, res: Response) => {
   const { success, data, error } = formSchema.safeParse(req.body);
   if (!success) return res.status(400).json(error);
 
+  const subject = data.subject || `New Form Message by ${data.name}`;
+
   const mailSender = new SendMail(
     data.email,
-    `New Form Message by ${data.name}`,
+    subject,
     data.name,
-    data.message
+    data.message,
+    data.html
   );
   try {
     await mailSender.send();
